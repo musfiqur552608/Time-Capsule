@@ -116,3 +116,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+
+CELERY_BEAT_SCHEDULE = {
+    "unlock-due-capsules-every-minute":{
+        "task": "capsules.tasks.check_due_capsules",
+        "schedule": 60.0, 
+    }
+}

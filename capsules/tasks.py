@@ -6,6 +6,24 @@ from django.utils import timezone
 
 logger = logging.getLogger(__name__)
 
+@shared_task
+def check_due_capsules():
+    from .models import Capsule
+   
+    due=Capsule.objects.filter(
+        status=Capsule.Status.SEALED,
+        unlock_at__lte = timezone.now(),
+    )
+    count = 0
+    for capsule in due:
+        capsule.status = Capsule.Status.UNLOCKED
+        capsule.save(update_fields=["status"])
+        deliver_capsule.delay(capsule.id)
+        count += 1
+    
+    logger.info("Beat scan complete: %s capsule(s) unlocked.", count)
+    return f"unlocked {count} capsule(s)"
+
 
 @shared_task(bind=True, max_retries=3, default_retry_delay=30)
 def deliver_capsule(self, capsule_id):
