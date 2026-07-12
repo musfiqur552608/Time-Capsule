@@ -1,0 +1,65 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  max-width: 620px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  font-family: Georgia, serif;
+  background: #101623;
+  color: #e8e6df;
+}
+
+h1 {
+  color: #c9a24b;
+}
+
+.card,
+.capsule {
+  background: #1a2233;
+  border: 1px solid #2c3850;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+label {
+  display: block;
+  margin: .7rem 0 .2rem;
+  font-size: .8rem;
+  color: #8b93a7;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: .5rem;
+  background: #101623;
+  border: 1px solid #2c3850;
+  color: inherit;
+}
+
+button {
+  margin-top: 1rem;
+  padding: .7rem 1.4rem;
+  background: #c9a24b;
+  border: none;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: .5;
+}
+
+.capsule.sealed {
+  border-left: 3px solid #c9a24b;
+}
+
+.capsule.delivered,
+.capsule.unlocked {
+  border-left: 3px solid #7fc8a9;
+}
+
+.error {
+  color: #e08585;
+}
